@@ -1,54 +1,66 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
         ink: {
-          950: "#06070A",
-          900: "#0A0C10",
-          850: "#0E1116",
-          800: "#12161C",
-          750: "#171C24",
-          700: "#1E242E",
+          DEFAULT: "#080C11",
+          900: "#0B1017",
+          800: "#111823",
+          700: "#18212E",
+          600: "#222E3D",
         },
-        steel: {
-          100: "#F4F6F8",
-          200: "#DDE2E8",
-          300: "#B9C1CB",
-          400: "#8F98A5",
-          500: "#6B7482",
-          600: "#4A525E",
+        aqua: {
+          DEFAULT: "#33D6C0",
+          light: "#6FEBDA",
+          dark: "#12A491",
         },
-        accent: {
-          DEFAULT: "#1F9BE0",
-          soft: "#57BEF5",
-          deep: "#0C6FA8",
+        chrome: {
+          DEFAULT: "#C6D2DE",
+          dim: "#96A4B2",
+          muted: "#7C8A99",
         },
-        gold: "#E8B34B",
       },
       fontFamily: {
-        display: ["'Archivo Variable'", "Archivo", "Impact", "system-ui", "sans-serif"],
-        sans: ["'Inter Variable'", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
-      opacity: { 2: "0.02", 3: "0.03", 4: "0.04", 6: "0.06", 8: "0.08", 12: "0.12", 15: "0.15", 18: "0.18", 22: "0.22", 35: "0.35", 45: "0.45", 55: "0.55", 65: "0.65", 85: "0.85", 92: "0.92", 97: "0.97" },
-      maxWidth: { shell: "1280px" },
       boxShadow: {
-        lift: "0 30px 70px -20px rgba(0,0,0,0.85)",
-        edge: "inset 0 1px 0 rgba(255,255,255,0.07)",
+        glow: "0 0 60px -15px rgba(51, 214, 192, 0.45)",
+        card: "0 20px 50px -25px rgba(0, 0, 0, 0.8)",
       },
       backgroundImage: {
-        "metal": "linear-gradient(180deg,#ffffff 0%,#cfd6de 45%,#8b94a1 60%,#eef2f6 100%)",
-        "grid-fade": "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.09), transparent 60%)",
+        "grid-fade":
+          "linear-gradient(to bottom, rgba(8,12,17,0) 0%, rgba(8,12,17,1) 100%)",
       },
       keyframes: {
-        drift: { "0%,100%": { transform: "translate3d(0,0,0)" }, "50%": { transform: "translate3d(0,-14px,0)" } },
-        shimmer: { "0%": { backgroundPosition: "-200% 0" }, "100%": { backgroundPosition: "200% 0" } },
+        sheen: {
+          "0%": { transform: "translateX(-120%) skewX(-18deg)" },
+          "100%": { transform: "translateX(320%) skewX(-18deg)" },
+        },
+        floaty: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
-      animation: { drift: "drift 9s ease-in-out infinite", shimmer: "shimmer 3.5s linear infinite" },
+      animation: {
+        sheen: "sheen 4.5s ease-in-out infinite",
+        floaty: "floaty 6s ease-in-out infinite",
+        marquee: "marquee 32s linear infinite",
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

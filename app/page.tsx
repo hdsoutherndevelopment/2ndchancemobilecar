@@ -1,45 +1,72 @@
-import Nav from "@/components/site/Nav";
-import Footer from "@/components/site/Footer";
-import MobileBar from "@/components/site/MobileBar";
-import Hero from "@/components/sections/Hero";
-import TrustStrip from "@/components/sections/TrustStrip";
-import Services from "@/components/sections/Services";
-import Transformation from "@/components/sections/Transformation";
-import WhyChoose from "@/components/sections/WhyChoose";
-import Process from "@/components/sections/Process";
-import MobileValeting from "@/components/sections/MobileValeting";
-import Commercial from "@/components/sections/Commercial";
-import Work from "@/components/sections/Work";
-import Reviews from "@/components/sections/Reviews";
-import Areas from "@/components/sections/Areas";
-import About from "@/components/sections/About";
-import Faq from "@/components/sections/Faq";
-import FinalCta from "@/components/sections/FinalCta";
-import QuoteSection from "@/components/sections/QuoteSection";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import TrustMarquee from "@/components/TrustMarquee";
+import Services from "@/components/Services";
+import Packages from "@/components/Packages";
+import Process from "@/components/Process";
+import Restoration from "@/components/Restoration";
+import Coverage from "@/components/Coverage";
+import Faq from "@/components/Faq";
+import QuoteSection from "@/components/QuoteSection";
+import Footer from "@/components/Footer";
+import { faqs, services, site } from "@/lib/site";
 
-export default function Home() {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AutoWash",
+      "@id": `${site.url}/#business`,
+      name: site.name,
+      description: site.description,
+      url: site.url,
+      telephone: site.phone,
+      email: site.email,
+      areaServed: site.county,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.baseTown,
+        addressRegion: site.county,
+        addressCountry: "GB",
+      },
+      openingHours: ["Mo-Fr 08:00-18:00", "Sa 08:00-16:00"],
+      makesOffer: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.blurb },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${site.url}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
+export default function HomePage() {
   return (
     <>
-      <Nav />
-      <main id="main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Header />
+      <main>
         <Hero />
-        <TrustStrip />
+        <TrustMarquee />
         <Services />
-        <Transformation />
-        <WhyChoose />
+        <Packages />
         <Process />
-        <MobileValeting />
-        <Commercial />
-        <Work />
-        <Reviews />
-        <Areas />
-        <About />
+        <Restoration />
+        <Coverage />
         <Faq />
-        <FinalCta />
         <QuoteSection />
       </main>
       <Footer />
-      <MobileBar />
     </>
   );
 }

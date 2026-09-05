@@ -1,74 +1,130 @@
-# 2nd Chance Mobile Car & Van Valet — Ferndown, Dorset
+# 2nd Chance Mobile Car & Van Valet
 
-Premium, conversion-focused site. Next.js 15 (App Router) · TypeScript · Tailwind · Framer Motion · Lucide.
-Built by HD Southern Development.
+Marketing site for a mobile car and van valeting business covering Southampton and
+the surrounding Hampshire towns.
 
-## Run locally
+Built with **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**,
+**Framer Motion** and **Lucide** icons. Deployed via GitHub to Vercel.
+
+---
+
+## Why this rebuild exists
+
+The previous copy of this project failed on Vercel with:
+
+> Error: No Output Directory named "public" found after the Build completed.
+
+That is not a code fault. It happens when the Vercel project treats the repo as a
+plain static site instead of a Next.js app, so it looks for a `public/` folder
+rather than serving the `.next` build output.
+
+This version fixes it inside the repo with a `vercel.json` that pins the framework:
+
+```json
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
+}
+```
+
+Because this lives in the repo, it overrides whatever the dashboard Framework Preset
+dropdown is set to, so the build cannot fall back to static-site behaviour.
+
+Three other changes reduce build risk:
+
+- **Next.js pinned to `15.5.25`** instead of `15.5.4`, which npm flags for
+  CVE-2025-66478.
+- **Fonts load via a stylesheet `<link>` rather than `next/font`.** `next/font`
+  downloads fonts at build time, so a network hiccup on the build machine can fail
+  the entire build. A stylesheet link cannot.
+- **No ESLint dependency**, so the build cannot fail on lint rules such as
+  `react/no-unescaped-entities`.
+
+---
+
+## Running it locally
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run dev
 ```
 
-## Deploy
+Then open http://localhost:3000
 
-Push to GitHub and import into Vercel (framework preset: Next.js — auto-detected).
+To check a production build before pushing:
 
-## Environment variables
+```bash
+npm run build
+```
 
-Set these in Vercel → Project → Settings → Environment Variables.
-Until at least one delivery channel is configured the quote form returns a clear
-"please call us on 07718 799720" error rather than silently pretending to submit.
+---
 
-| Variable | Purpose |
+## Editing the content
+
+Almost everything a client would want changed lives in one file: **`lib/site.ts`**.
+
+| What | Where in `lib/site.ts` |
 | --- | --- |
-| `RESEND_API_KEY` | Sends the enquiry email + customer confirmation |
-| `RESEND_FROM` | Verified sender, e.g. `2nd Chance <quotes@yourdomain.co.uk>` (defaults to Resend's onboarding sender) |
-| `BUSINESS_EMAIL` | Where quote requests are delivered |
-| `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Optional — also stores enquiries |
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL used by metadata, sitemap, robots and JSON-LD |
+| Business name, phone, email, hours, socials | `site` |
+| Service cards | `services` |
+| Package names, prices, durations, inclusions | `packages` |
+| How it works steps | `processSteps` |
+| Coverage areas | `coverage` |
+| FAQ questions and answers | `faqs` |
+| Vehicle options in the quote form | `vehicleTypes` |
 
-## Supabase table (optional)
+Anything marked `CONFIRM` in that file is a placeholder that must be checked with the
+client before launch: phone number, email, prices, coverage list and social links.
 
-```sql
-create table if not exists enquiries (
-  id uuid primary key default gen_random_uuid(),
-  created_at timestamptz default now(),
-  name text not null,
-  email text,
-  phone text,
-  service text,
-  message text,
-  source text default 'website',
-  status text default 'new'
-);
-```
+---
 
-## Before sending to the client / launch
+## The quote form
 
-1. **Photography** — every image is a placeholder from Unsplash, referenced in `lib/config.ts`
-   (`services`, `gallery`, `beforeAfter`, plus the hero constant in `components/sections/Hero.tsx`).
-   Swap for 2nd Chance's own work. Local files: drop into `public/images/` and change the paths.
-2. **Reviews** — `reviews` in `lib/config.ts` is sample copy, labelled as such on the page
-   (`reviewsNote`). Replace with the real Yell reviews and remove the note.
-3. **Before/after** — the "before" side is a CSS grade of the same photo, and the section carries a
-   visible demo caption. Replace with real matched before/after pairs and remove the caption in
-   `components/sections/Transformation.tsx`.
-4. **Socials** — no Facebook/Instagram found for the business, so no social links are rendered.
-   Add them to the footer once the client provides them.
-5. Set `NEXT_PUBLIC_SITE_URL` to the final domain.
+`components/QuoteForm.tsx` posts to `app/api/quote/route.ts`.
 
-## Structure
+By default the route runs in **demo mode**: it validates the submission, rejects
+honeypot/bot entries and returns a success message, but sends nothing anywhere. The
+confirmation panel says so explicitly.
+
+To switch on real email delivery, set these environment variables in Vercel
+(Settings, Environment Variables) and redeploy:
 
 ```
-app/            layout (metadata + JSON-LD), page, robots, sitemap, not-found, api/quote
-components/ui   Reveal, Shot, Stars, Counter, SectionHeading, BeforeAfter
-components/site Nav, Footer, MobileBar (sticky Call / Quote)
-components/sections  Hero, TrustStrip, Services, Transformation, WhyChoose, Process,
-                MobileValeting, Commercial, Work, Reviews, Areas, About, Faq, FinalCta, QuoteSection
-components/forms QuoteForm
-lib/            config (all business content), schema (JSON-LD), validation (Zod), resend, supabase
+RESEND_API_KEY=...
+QUOTE_TO_EMAIL=where-enquiries-should-land@example.com
+QUOTE_FROM_EMAIL=quotes@yourverifieddomain.co.uk
 ```
 
-All copy, pricing, areas and imagery live in `lib/config.ts` — one file to edit.
+The route calls the Resend HTTP API directly, so there is no extra package to
+install. If any of the three variables is missing it stays safely in demo mode.
+
+---
+
+## Artwork
+
+All illustrations are original inline SVG (`components/CarGraphic.tsx`,
+`components/Logo.tsx`, and the before/after panels in `components/Restoration.tsx`).
+There is no stock photography and no external image host, so nothing can break or
+expire. Swap the before/after illustration for the client's own photography once it
+is available.
+
+---
+
+## Project structure
+
+```
+app/
+  api/quote/route.ts    Quote form endpoint (demo mode by default)
+  globals.css           Tailwind layers and component classes
+  layout.tsx            Metadata, fonts, html shell
+  page.tsx              Home page and JSON-LD structured data
+  robots.ts             /robots.txt
+  sitemap.ts            /sitemap.xml
+components/             UI components
+lib/site.ts             All business content lives here
+vercel.json             Forces the Next.js framework preset
+```
+
+---
+
+Site by [HD Southern Development](https://hdsoutherndevelopment.com)
