@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Phone, Sparkles } from "lucide-react";
+import { Phone, ArrowRight } from "lucide-react";
 import { site } from "@/lib/site";
 
 export default function MobileBar() {
@@ -23,7 +23,7 @@ export default function MobileBar() {
           animate={{ y: 0 }}
           exit={{ y: 90 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink-950/92 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-2xl lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-paper/95 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl lg:hidden"
         >
           <div className="flex gap-2.5">
             <a href={site.phoneHref} className="btn-ghost flex-1 !py-3">
@@ -31,8 +31,8 @@ export default function MobileBar() {
               Call
             </a>
             <a href="#quote" className="btn-primary flex-1 !py-3">
-              <Sparkles className="h-4 w-4" strokeWidth={1.9} />
               Free quote
+              <ArrowRight className="h-4 w-4" strokeWidth={2.1} />
             </a>
           </div>
         </motion.div>

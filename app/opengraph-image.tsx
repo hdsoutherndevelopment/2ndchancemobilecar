@@ -17,9 +17,8 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background:
-            "linear-gradient(135deg, #05080C 0%, #0B1017 55%, #0C1A1E 100%)",
-          color: "#D3DCE6",
+          background: "#F7F4ED",
+          color: "#3F474E",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -28,11 +27,11 @@ export default async function Image() {
               width: 56,
               height: 56,
               borderRadius: 18,
-              border: "2px solid #2FDCC2",
+              background: "#14452F",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#2FDCC2",
+              color: "#F7F4ED",
               fontSize: 28,
               fontWeight: 700,
             }}
@@ -40,10 +39,10 @@ export default async function Image() {
             2C
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ color: "#ffffff", fontSize: 26, fontWeight: 700 }}>
+            <span style={{ color: "#12161A", fontSize: 26, fontWeight: 700 }}>
               2nd Chance
             </span>
-            <span style={{ color: "#2FDCC2", fontSize: 15, letterSpacing: 4 }}>
+            <span style={{ color: "#B65F33", fontSize: 15, letterSpacing: 4 }}>
               MOBILE VALET
             </span>
           </div>
@@ -52,7 +51,7 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span
             style={{
-              color: "#ffffff",
+              color: "#12161A",
               fontSize: 76,
               fontWeight: 700,
               lineHeight: 1.05,
@@ -63,7 +62,7 @@ export default async function Image() {
           </span>
           <span
             style={{
-              color: "#2FDCC2",
+              color: "#14452F",
               fontSize: 76,
               fontWeight: 700,
               lineHeight: 1.05,
@@ -82,13 +81,13 @@ export default async function Image() {
             display: "flex",
             gap: 14,
             fontSize: 20,
-            color: "#7D8B9B",
+            color: "#767E86",
           }}
         >
           <span>We come to you</span>
-          <span style={{ color: "#2FDCC2" }}>·</span>
+          <span style={{ color: "#B65F33" }}>·</span>
           <span>Own water &amp; power</span>
-          <span style={{ color: "#2FDCC2" }}>·</span>
+          <span style={{ color: "#B65F33" }}>·</span>
           <span>Fully insured</span>
         </div>
       </div>

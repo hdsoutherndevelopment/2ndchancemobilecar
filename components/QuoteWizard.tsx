@@ -99,22 +99,22 @@ export default function QuoteWizard() {
       <motion.div
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="panel flex flex-col items-center px-8 py-20 text-center"
+        className="card flex flex-col items-center px-8 py-20 text-center"
       >
         <span className="relative flex h-16 w-16 items-center justify-center">
-          <span className="absolute inset-0 animate-pulse-ring rounded-full bg-aqua/30" />
-          <CheckCircle2 className="relative h-14 w-14 text-aqua" strokeWidth={1.4} />
+          <span className="absolute inset-0 animate-pulse-ring rounded-full bg-forest/25" />
+          <CheckCircle2 className="relative h-14 w-14 text-forest" strokeWidth={1.4} />
         </span>
-        <h3 className="h2 mt-7">Request received</h3>
+        <h3 className="h2 mt-7 !text-[2rem]">Request received</h3>
         <p className="lede mt-4 max-w-md">
           Thanks {name.split(" ")[0] || "—"}. We will come back with a fixed price, usually
           the same day. If it is urgent, ring{" "}
-          <a href={site.phoneHref} className="text-aqua hover:underline">
+          <a href={site.phoneHref} className="text-forest underline underline-offset-4">
             {site.phone}
           </a>
           .
         </p>
-        <p className="mt-9 text-[10px] font-bold uppercase tracking-[0.2em] text-chrome-muted">
+        <p className="mt-9 text-[10px] font-bold uppercase tracking-[0.2em] text-ink-mute">
           Demo site — no message has actually been sent
         </p>
       </motion.div>
@@ -122,7 +122,7 @@ export default function QuoteWizard() {
   }
 
   return (
-    <div className="panel p-7 sm:p-9">
+    <div className="card p-7 sm:p-9">
       {/* progress */}
       <div className="mb-8 flex items-center gap-3">
         {steps.map((label, i) => (
@@ -130,23 +130,23 @@ export default function QuoteWizard() {
             <div className="flex items-center gap-2.5">
               <span
                 className={`flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-extrabold transition ${
-                  i <= step ? "bg-aqua text-ink-950" : "border border-white/[0.12] text-chrome-muted"
+                  i <= step ? "bg-forest text-paper" : "border border-ink/15 text-ink-mute"
                 }`}
               >
                 {i + 1}
               </span>
               <span
                 className={`hidden text-[11px] font-bold uppercase tracking-[0.16em] sm:block ${
-                  i <= step ? "text-white" : "text-chrome-muted"
+                  i <= step ? "text-ink" : "text-ink-mute"
                 }`}
               >
                 {label}
               </span>
             </div>
             {i < steps.length - 1 ? (
-              <span className="h-px flex-1 bg-white/10">
+              <span className="h-px flex-1 bg-ink/[0.12]">
                 <motion.span
-                  className="block h-px bg-aqua"
+                  className="block h-px bg-forest"
                   initial={false}
                   animate={{ scaleX: i < step ? 1 : 0 }}
                   style={{ transformOrigin: "left" }}
@@ -181,7 +181,7 @@ export default function QuoteWizard() {
                     }`}
                   >
                     <span>{v.label}</span>
-                    <span className="text-[11px] font-medium text-chrome-muted">
+                    <span className="text-[11px] font-medium text-ink-mute">
                       {v.example}
                     </span>
                   </button>
@@ -202,7 +202,7 @@ export default function QuoteWizard() {
                     }`}
                   >
                     <span>{c.label}</span>
-                    <span className="text-[11px] font-medium text-chrome-muted">{c.detail}</span>
+                    <span className="text-[11px] font-medium text-ink-mute">{c.detail}</span>
                   </button>
                 ))}
               </div>
@@ -260,8 +260,8 @@ export default function QuoteWizard() {
             transition={{ duration: 0.25 }}
             className="space-y-5"
           >
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 text-[13px] text-chrome-muted">
-              <span className="font-semibold text-white">{summary.vehicle}</span> ·{" "}
+            <div className="rounded-xl border border-ink/10 bg-paper-dark px-4 py-3 text-[13px] text-ink-soft">
+              <span className="font-semibold text-ink">{summary.vehicle}</span> ·{" "}
               {summary.condition} · {service}
             </div>
 
@@ -278,7 +278,7 @@ export default function QuoteWizard() {
                   placeholder="Jane Smith"
                 />
                 {fieldErrors.name ? (
-                  <p className="mt-1.5 text-xs text-red-400">{fieldErrors.name}</p>
+                  <p className="mt-1.5 text-xs text-red-600">{fieldErrors.name}</p>
                 ) : null}
               </div>
               <div>
@@ -293,7 +293,7 @@ export default function QuoteWizard() {
                   placeholder="SO14"
                 />
                 {fieldErrors.postcode ? (
-                  <p className="mt-1.5 text-xs text-red-400">{fieldErrors.postcode}</p>
+                  <p className="mt-1.5 text-xs text-red-600">{fieldErrors.postcode}</p>
                 ) : null}
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function QuoteWizard() {
                   placeholder="07700 900000"
                 />
                 {fieldErrors.phone ? (
-                  <p className="mt-1.5 text-xs text-red-400">{fieldErrors.phone}</p>
+                  <p className="mt-1.5 text-xs text-red-600">{fieldErrors.phone}</p>
                 ) : null}
               </div>
               <div>
@@ -325,7 +325,7 @@ export default function QuoteWizard() {
                   placeholder="you@example.com"
                 />
                 {fieldErrors.email ? (
-                  <p className="mt-1.5 text-xs text-red-400">{fieldErrors.email}</p>
+                  <p className="mt-1.5 text-xs text-red-600">{fieldErrors.email}</p>
                 ) : null}
               </div>
             </div>
@@ -342,7 +342,7 @@ export default function QuoteWizard() {
             </div>
 
             {serverError ? (
-              <p className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+              <p className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
                 {serverError}
               </p>
             ) : null}
@@ -350,7 +350,7 @@ export default function QuoteWizard() {
         ) : null}
       </AnimatePresence>
 
-      <div className="mt-8 flex items-center gap-3 border-t border-white/[0.07] pt-7">
+      <div className="mt-8 flex items-center gap-3 border-t border-ink/10 pt-7">
         {step > 0 ? (
           <button
             type="button"
@@ -390,10 +390,10 @@ export default function QuoteWizard() {
         )}
       </div>
 
-      <p className="mt-5 flex items-center gap-2 text-xs text-chrome-muted">
+      <p className="mt-5 flex items-center gap-2 text-xs text-ink-mute">
         <Phone className="h-3.5 w-3.5" strokeWidth={2} />
         Prefer to talk?{" "}
-        <a href={site.phoneHref} className="font-semibold text-aqua hover:underline">
+        <a href={site.phoneHref} className="font-semibold text-forest underline underline-offset-4">
           {site.phone}
         </a>
       </p>

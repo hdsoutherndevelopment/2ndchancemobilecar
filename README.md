@@ -42,6 +42,28 @@ Three other changes reduce build risk:
 
 ---
 
+## Design system
+
+Light editorial theme, deliberately un-templated:
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `paper` | `#F7F4ED` | Page ground (bone) |
+| `paper-dark` | `#EFE9DC` | Alternating section bands |
+| `ink` | `#12161A` | Headings, footer ground |
+| `forest` | `#14452F` | Primary actions, dark feature band |
+| `copper` | `#B65F33` | Accent, rules, index numerals |
+
+Type is **Instrument Serif** for display (large, high-contrast, italic used for the
+brand line) with **Inter** for everything functional. Furniture is squared off —
+`rounded-xl` buttons, hairline `ink/10` rules, index numerals rather than icon
+badges — so the page reads like print rather than a SaaS template.
+
+All colours live in `tailwind.config.ts`; changing the five tokens above re-skins the
+whole site.
+
+---
+
 ## What is on the page
 
 1. **Hero** — parallax layered scene with an original SVG car illustration and animated

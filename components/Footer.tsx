@@ -6,26 +6,26 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/[0.07] bg-ink-950 pb-28 pt-16 lg:pb-16">
+    <footer className="bg-ink pb-28 pt-20 text-paper/70 lg:pb-16">
       <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
-            <Logo />
-            <p className="mt-6 max-w-sm text-[14px] leading-relaxed text-chrome-muted">
+            <Logo tone="paper" />
+            <p className="mt-7 max-w-sm text-[14px] leading-relaxed text-paper/60">
               {site.description}
             </p>
             <div className="mt-7 flex gap-2.5">
               <a
                 href={site.social.facebook}
                 aria-label="Facebook"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-chrome-muted transition hover:border-aqua/50 hover:text-aqua"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-paper/20 text-paper/70 transition hover:border-copper hover:text-copper"
               >
                 <Facebook className="h-4 w-4" strokeWidth={1.8} />
               </a>
               <a
                 href={site.social.instagram}
                 aria-label="Instagram"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-chrome-muted transition hover:border-aqua/50 hover:text-aqua"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-paper/20 text-paper/70 transition hover:border-copper hover:text-copper"
               >
                 <Instagram className="h-4 w-4" strokeWidth={1.8} />
               </a>
@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-paper">
               Services
             </h3>
             <ul className="mt-5 space-y-3">
@@ -41,7 +41,7 @@ export default function Footer() {
                 <li key={s.slug}>
                   <a
                     href="#services"
-                    className="text-[13.5px] text-chrome-muted transition hover:text-aqua"
+                    className="text-[13.5px] text-paper/60 transition hover:text-copper"
                   >
                     {s.title}
                   </a>
@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-paper">
               Areas
             </h3>
             <ul className="mt-5 space-y-3">
@@ -59,7 +59,7 @@ export default function Footer() {
                 <li key={c}>
                   <a
                     href="#areas"
-                    className="text-[13.5px] text-chrome-muted transition hover:text-aqua"
+                    className="text-[13.5px] text-paper/60 transition hover:text-copper"
                   >
                     {c}
                   </a>
@@ -69,30 +69,30 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-paper">
               Get in touch
             </h3>
             <ul className="mt-5 space-y-3">
               <li>
                 <a
                   href={site.phoneHref}
-                  className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-chrome transition hover:text-aqua"
+                  className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-paper transition hover:text-copper"
                 >
-                  <Phone className="h-3.5 w-3.5" strokeWidth={2} />
+                  <Phone className="h-3.5 w-3.5 text-copper" strokeWidth={2} />
                   {site.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-2 text-[13.5px] text-chrome-muted transition hover:text-aqua"
+                  className="inline-flex items-center gap-2 text-[13.5px] text-paper/60 transition hover:text-copper"
                 >
-                  <Mail className="h-3.5 w-3.5" strokeWidth={2} />
+                  <Mail className="h-3.5 w-3.5 text-copper" strokeWidth={2} />
                   {site.email}
                 </a>
               </li>
               <li className="pt-3">
-                <a href="#quote" className="btn-primary !px-5 !py-2.5">
+                <a href="#quote" className="btn-copper !px-5 !py-3">
                   Get a quote
                   <ArrowUpRight className="h-4 w-4" strokeWidth={2.2} />
                 </a>
@@ -101,7 +101,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/[0.07] pt-8 text-xs text-chrome-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-paper/15 pt-8 text-xs text-paper/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>
@@ -109,7 +109,7 @@ export default function Footer() {
             Site by{" "}
             <a
               href="https://hdsoutherndevelopment.com"
-              className="font-semibold text-chrome transition hover:text-aqua"
+              className="font-semibold text-paper/80 transition hover:text-copper"
             >
               HD Southern Development
             </a>

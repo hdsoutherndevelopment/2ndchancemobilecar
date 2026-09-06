@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Calculator, Info } from "lucide-react";
+import { ArrowRight, Info } from "lucide-react";
 import {
   baseDurations,
   conditions,
@@ -53,13 +53,12 @@ export default function Estimator() {
   return (
     <section
       id="estimate"
-      className="scroll-mt-24 border-y border-white/[0.07] bg-ink-900/50 py-24 sm:py-32"
+      className="scroll-mt-28 border-y border-ink/10 bg-paper-dark py-24 sm:py-32"
     >
       <div className="container-page grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:gap-16">
         <div className="lg:col-start-1 lg:row-start-1">
           <Reveal>
             <span className="eyebrow">
-              <Calculator className="h-3 w-3" strokeWidth={2.4} />
               Instant estimate
             </span>
           </Reveal>
@@ -75,43 +74,40 @@ export default function Estimator() {
           </Reveal>
         </div>
 
-        <div className="sticky top-[86px] z-20 h-fit lg:top-28 lg:col-start-2 lg:row-start-1 lg:row-span-2">
-          <div className="panel noise relative overflow-hidden bg-ink-900/95 p-6 backdrop-blur-xl sm:p-8">
-            <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                backgroundImage:
-                  "radial-gradient(70% 50% at 50% 0%, rgba(47,220,194,0.16) 0%, rgba(5,8,12,0) 70%)",
-              }}
+        <div className="sticky top-[90px] z-20 h-fit lg:top-28 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+          <div className="card grain relative overflow-hidden p-6 sm:p-8">
+            <span
+              className="absolute inset-x-0 top-0 h-1.5 bg-copper"
+              aria-hidden="true"
             />
             <div className="relative">
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-chrome-muted">
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink-mute">
                 Estimated price
               </span>
 
               <div className="mt-3 flex items-end gap-2">
-                <span className="font-display text-5xl font-extrabold tracking-tightest text-white sm:text-6xl">
+                <span className="font-display text-6xl leading-none tracking-tightest text-ink sm:text-7xl">
                   <AnimatedPrice value={low} />
                 </span>
-                <span className="pb-2 font-display text-2xl font-bold text-chrome-muted">
+                <span className="pb-1.5 font-display text-3xl text-ink-mute">
                   – <AnimatedPrice value={high} />
                 </span>
               </div>
 
-              <p className="mt-3 text-[13px] text-chrome-muted">
+              <p className="mt-3 text-[13px] font-medium text-ink-soft">
                 On site {timeLabel} · {pkg}
               </p>
 
-              <div className="mt-6 hidden space-y-3 border-t border-white/[0.07] pt-6 text-sm sm:block">
+              <div className="mt-6 hidden space-y-3 border-t border-ink/10 pt-6 text-sm sm:block">
                 <div className="flex items-center justify-between">
-                  <span className="text-chrome-muted">Vehicle</span>
-                  <span className="font-semibold text-white">
+                  <span className="text-ink-mute">Vehicle</span>
+                  <span className="font-semibold text-ink">
                     {vehicleSizes.find((v) => v.key === size)?.label}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-chrome-muted">Condition</span>
-                  <span className="font-semibold text-white">
+                  <span className="text-ink-mute">Condition</span>
+                  <span className="font-semibold text-ink">
                     {conditions.find((c) => c.key === condition)?.label}
                   </span>
                 </div>
@@ -122,8 +118,8 @@ export default function Estimator() {
                 <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
               </a>
 
-              <p className="mt-5 hidden items-start gap-2 text-[11.5px] leading-relaxed text-chrome-muted sm:flex">
-                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-aqua" strokeWidth={2} />
+              <p className="mt-5 hidden items-start gap-2 text-[11.5px] leading-relaxed text-ink-mute sm:flex">
+                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-copper" strokeWidth={2} />
                 A guide only. We confirm a fixed price once we have seen photos or the
                 vehicle itself — and never change it halfway through.
               </p>
@@ -166,7 +162,7 @@ export default function Estimator() {
                     aria-pressed={size === v.key}
                   >
                     <span>{v.label}</span>
-                    <span className="text-[11px] font-medium text-chrome-muted">
+                    <span className="text-[11px] font-medium text-ink-mute">
                       {v.example}
                     </span>
                   </button>
@@ -190,7 +186,7 @@ export default function Estimator() {
                     aria-pressed={condition === c.key}
                   >
                     <span>{c.label}</span>
-                    <span className="text-[11px] font-medium text-chrome-muted">
+                    <span className="text-[11px] font-medium text-ink-mute">
                       {c.detail}
                     </span>
                   </button>
@@ -199,8 +195,8 @@ export default function Estimator() {
             </div>
           </Reveal>
 
-          <p className="flex items-start gap-2 text-[11.5px] leading-relaxed text-chrome-muted sm:hidden">
-            <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-aqua" strokeWidth={2} />
+          <p className="flex items-start gap-2 text-[11.5px] leading-relaxed text-ink-mute sm:hidden">
+            <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-copper" strokeWidth={2} />
             A guide only. We confirm a fixed price once we have seen photos or the vehicle
             itself — and never change it halfway through.
           </p>

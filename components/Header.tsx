@@ -37,36 +37,36 @@ export default function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-ink-950/80 backdrop-blur-2xl"
+          ? "border-b border-ink/10 bg-paper/90 backdrop-blur-xl"
           : "border-b border-transparent"
       }`}
     >
-      <div className="container-page flex h-[76px] items-center justify-between">
+      <div className="container-page flex h-[80px] items-center justify-between">
         <a href="#top" aria-label={site.name} className="shrink-0">
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="rounded-full px-3.5 py-2 text-[13px] font-semibold text-chrome-muted transition hover:bg-white/[0.05] hover:text-white"
+              className="relative text-[13px] font-semibold text-ink-soft transition after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-copper after:transition-all after:duration-300 hover:text-ink hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2.5 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-2 rounded-full border border-white/[0.12] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-aqua/50 hover:text-aqua"
+            className="inline-flex items-center gap-2 text-[13px] font-bold text-ink transition hover:text-forest"
           >
-            <Phone className="h-3.5 w-3.5" strokeWidth={2} />
+            <Phone className="h-3.5 w-3.5 text-copper" strokeWidth={2.2} />
             {site.phone}
           </a>
-          <a href="#quote" className="btn-primary !px-5 !py-2.5">
+          <a href="#quote" className="btn-primary !px-5 !py-3">
             Get a quote
             <ArrowUpRight className="h-4 w-4" strokeWidth={2.2} />
           </a>
@@ -75,7 +75,7 @@ export default function Header() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.12] text-white lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-ink/15 text-ink lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
@@ -90,21 +90,24 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="border-t border-white/[0.07] bg-ink-950/97 backdrop-blur-2xl lg:hidden"
+            className="border-t border-ink/10 bg-paper lg:hidden"
           >
-            <div className="container-page flex flex-col gap-1 py-5">
-              {links.map((l) => (
+            <div className="container-page flex flex-col py-4">
+              {links.map((l, i) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-xl px-3 py-3.5 text-base font-semibold text-chrome transition hover:bg-white/5 hover:text-white"
+                  className="flex items-center justify-between border-b border-ink/[0.07] py-4 text-[17px] font-semibold text-ink"
                 >
-                  {l.label}
-                  <ArrowUpRight className="h-4 w-4 text-chrome-muted" strokeWidth={1.8} />
+                  <span className="flex items-baseline gap-4">
+                    <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
+                    {l.label}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-ink-mute" strokeWidth={1.8} />
                 </a>
               ))}
-              <div className="mt-4 flex flex-col gap-2.5">
+              <div className="mt-6 flex flex-col gap-2.5">
                 <a href={site.phoneHref} className="btn-ghost w-full">
                   <Phone className="h-4 w-4" strokeWidth={1.9} />
                   {site.phone}

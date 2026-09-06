@@ -1,13 +1,11 @@
 import { services } from "@/lib/site";
 import SectionHeading from "./SectionHeading";
 import ServiceIcon from "./Icon";
-import { StaggerGroup, StaggerItem } from "./Reveal";
+import Reveal from "./Reveal";
 
 export default function Services() {
-  const [lead, ...rest] = services;
-
   return (
-    <section id="services" className="scroll-mt-24 py-24 sm:py-32">
+    <section id="services" className="scroll-mt-28 py-24 sm:py-32">
       <div className="container-page">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
@@ -20,58 +18,39 @@ export default function Services() {
           </a>
         </div>
 
-        <StaggerGroup className="mt-16 grid gap-4 lg:grid-cols-3">
-          <StaggerItem className="lg:row-span-2">
-            <article className="panel panel-hover noise relative flex h-full flex-col overflow-hidden p-8">
-              <div
-                className="pointer-events-none absolute inset-0 opacity-60"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(80% 60% at 50% 0%, rgba(47,220,194,0.14) 0%, rgba(5,8,12,0) 70%)",
-                }}
-              />
-              <div className="relative">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-aqua/25 bg-aqua/10 text-aqua">
-                  <ServiceIcon name={lead.icon} className="h-6 w-6" />
-                </div>
-                <h3 className="font-display mt-7 text-2xl font-extrabold tracking-tight text-white">
-                  {lead.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-chrome-muted">{lead.blurb}</p>
-              </div>
-
-              <ul className="relative mt-auto space-y-2.5 border-t border-white/[0.07] pt-6">
-                {lead.points.map((p) => (
-                  <li key={p} className="flex items-start gap-2.5 text-sm text-chrome">
-                    <span
-                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-aqua"
-                      aria-hidden="true"
-                    />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </StaggerItem>
-
-          {rest.map((service) => (
-            <StaggerItem key={service.slug}>
-              <article className="panel panel-hover group h-full p-6">
-                <div className="flex items-start gap-4">
-                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-aqua transition group-hover:border-aqua/30 group-hover:bg-aqua/10">
+        <div className="mt-16 border-t border-ink/10">
+          {services.map((service, i) => (
+            <Reveal key={service.slug} delay={Math.min(i * 0.04, 0.2)}>
+              <article className="group grid items-start gap-4 border-b border-ink/10 py-7 transition-colors duration-300 hover:bg-paper-dark/60 sm:grid-cols-[auto_1fr] sm:gap-8 lg:grid-cols-[auto_0.9fr_1.1fr] lg:px-4">
+                <div className="flex items-center gap-4">
+                  <span className="index-num w-6">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink/10 bg-paper-card text-forest transition group-hover:border-forest/30 group-hover:bg-forest-100">
                     <ServiceIcon name={service.icon} className="h-[18px] w-[18px]" />
-                  </div>
-                  <div>
-                    <h3 className="h3">{service.title}</h3>
-                    <p className="mt-2 text-[13.5px] leading-relaxed text-chrome-muted">
-                      {service.blurb}
-                    </p>
-                  </div>
+                  </span>
+                </div>
+
+                <h3 className="font-display text-2xl leading-tight tracking-tight text-ink">
+                  {service.title}
+                </h3>
+
+                <div>
+                  <p className="text-[14.5px] leading-relaxed text-ink-soft">{service.blurb}</p>
+                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
+                    {service.points.map((p) => (
+                      <li
+                        key={p}
+                        className="flex items-center gap-1.5 text-[12.5px] font-medium text-ink-mute"
+                      >
+                        <span className="h-1 w-1 rounded-full bg-copper" aria-hidden="true" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </article>
-            </StaggerItem>
+            </Reveal>
           ))}
-        </StaggerGroup>
+        </div>
       </div>
     </section>
   );
