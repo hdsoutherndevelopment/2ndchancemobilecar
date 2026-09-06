@@ -42,6 +42,29 @@ Three other changes reduce build risk:
 
 ---
 
+## What is on the page
+
+1. **Hero** — parallax layered scene with an original SVG car illustration and animated
+   sheen sweep.
+2. **Trust marquee** — continuous strip of the four things that win the job.
+3. **Services** — bento grid, one featured service plus seven supporting cards.
+4. **Instant estimate** — interactive calculator: package x vehicle size x condition
+   produces a live animated price range and time on site. Sticky result card so the
+   number stays visible while choosing, on mobile and desktop.
+5. **Packages** — three tiers, middle one featured.
+6. **Process** — scroll-linked timeline; the connecting line fills as you read.
+7. **Second chance** — drag-to-compare before/after interior illustration.
+8. **Vans & fleet** — commercial block for the higher-value work.
+9. **Coverage** — stylised interactive map with hover-linked town pins.
+10. **FAQs** — animated accordion.
+11. **Quote wizard** — three-step form (vehicle, job, contact) with per-step validation.
+12. **Sticky mobile call bar** — appears after the hero on small screens.
+
+Extras: scroll progress bar, generated Open Graph share image (`app/opengraph-image.tsx`),
+JSON-LD structured data for local business and FAQ, full reduced-motion support.
+
+---
+
 ## Running it locally
 
 ```bash

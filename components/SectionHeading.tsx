@@ -17,11 +17,11 @@ export default function SectionHeading({
         <span className="eyebrow">{eyebrow}</span>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2 className="h2 mt-4 text-balance">{title}</h2>
+        <h2 className="h2 mt-5 text-balance">{title}</h2>
       </Reveal>
       {lede ? (
         <Reveal delay={0.12}>
-          <p className="lede mt-4">{lede}</p>
+          <p className="lede mt-5">{lede}</p>
         </Reveal>
       ) : null}
     </div>

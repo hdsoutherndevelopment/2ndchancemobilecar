@@ -4,70 +4,91 @@
 
 :root {
   color-scheme: dark;
-  --font-display: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   @apply bg-ink text-chrome antialiased;
+  background-image:
+    radial-gradient(90% 60% at 50% -10%, rgba(47, 220, 194, 0.10) 0%, rgba(5, 8, 12, 0) 60%),
+    radial-gradient(60% 40% at 100% 20%, rgba(76, 141, 255, 0.07) 0%, rgba(5, 8, 12, 0) 60%);
+  background-attachment: fixed;
 }
 
 ::selection {
-  background: rgba(51, 214, 192, 0.35);
+  background: rgba(47, 220, 194, 0.35);
   color: #ffffff;
 }
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-aqua;
+    @apply inline-flex items-center gap-2 rounded-full border border-aqua/20 bg-aqua/[0.06] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-aqua;
   }
 
   .h1 {
-    @apply font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl;
+    @apply font-display text-[2.6rem] font-extrabold leading-[0.98] tracking-tightest text-white sm:text-6xl lg:text-[4.6rem];
   }
 
   .h2 {
-    @apply font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl;
+    @apply font-display text-[2rem] font-extrabold leading-[1.04] tracking-tightest text-white sm:text-[2.75rem];
   }
 
   .h3 {
-    @apply font-display text-lg font-semibold tracking-tight text-white;
+    @apply font-display text-lg font-bold tracking-tight text-white;
   }
 
   .lede {
-    @apply text-base leading-relaxed text-chrome-muted sm:text-lg;
+    @apply text-[15px] leading-relaxed text-chrome-muted sm:text-[17px];
   }
 
-  .card {
-    @apply rounded-2xl border border-white/[0.07] bg-white/[0.02] shadow-card backdrop-blur-sm;
+  .panel {
+    @apply rounded-3xl border border-white/[0.07] bg-white/[0.022] shadow-card backdrop-blur-[2px];
+  }
+
+  .panel-hover {
+    @apply transition duration-300 hover:border-aqua/25 hover:bg-white/[0.05] hover:shadow-lift;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[13px] font-bold tracking-wide transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-primary {
-    @apply btn bg-aqua text-ink hover:bg-aqua-light hover:shadow-glow;
+    @apply btn bg-aqua text-ink-950 hover:bg-aqua-light hover:shadow-glow;
   }
 
   .btn-ghost {
-    @apply btn border border-white/15 text-white hover:border-aqua/60 hover:text-aqua;
+    @apply btn border border-white/[0.12] bg-white/[0.02] text-white hover:border-aqua/50 hover:bg-aqua/[0.06] hover:text-aqua;
   }
 
   .field {
-    @apply w-full rounded-xl border border-white/10 bg-ink-800/80 px-4 py-3 text-sm text-white placeholder:text-chrome-muted/60 transition focus:border-aqua/60 focus:outline-none focus:ring-2 focus:ring-aqua/20;
+    @apply w-full rounded-2xl border border-white/10 bg-ink-800/70 px-4 py-3.5 text-sm text-white transition placeholder:text-chrome-muted/50 focus:border-aqua/60 focus:outline-none focus:ring-2 focus:ring-aqua/15;
   }
 
   .label {
-    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-chrome-muted;
+    @apply mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-chrome-muted;
+  }
+
+  .chip {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3 text-center text-[13px] font-semibold text-chrome transition hover:border-aqua/40 hover:text-white;
+  }
+
+  .chip-active {
+    @apply border-aqua/70 bg-aqua/10 text-white shadow-glow;
+  }
+
+  .rule {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/[0.12] to-transparent;
   }
 }
 
@@ -76,9 +97,26 @@ body {
     text-wrap: balance;
   }
 
-  .mask-fade-b {
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white to-aqua/70 bg-clip-text text-transparent;
+  }
+
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

@@ -242,3 +242,95 @@ export const vehicleTypes = [
   "Small van",
   "Large van or Luton",
 ] as const;
+
+/* -------------------------------------------------------------------------
+ * PRICE ESTIMATOR
+ * -------------------------------------------------------------------------
+ * The estimator multiplies a package base price by a vehicle-size factor and
+ * a condition factor, then shows a range. It is deliberately a guide only —
+ * every job is confirmed with a fixed price before work starts.
+ * CONFIRM: base prices and multipliers with the client.
+ * ---------------------------------------------------------------------- */
+
+export type SizeKey = "small" | "medium" | "large" | "mpv" | "van" | "luton";
+
+export const vehicleSizes: { key: SizeKey; label: string; example: string; factor: number }[] = [
+  { key: "small", label: "Small car", example: "Fiesta, Corsa, Polo", factor: 0.9 },
+  { key: "medium", label: "Hatch / saloon", example: "Golf, Focus, A3", factor: 1 },
+  { key: "large", label: "Estate / 4x4", example: "Qashqai, Tiguan, X3", factor: 1.2 },
+  { key: "mpv", label: "MPV / 7-seat", example: "Zafira, Galaxy, Touran", factor: 1.3 },
+  { key: "van", label: "Small van", example: "Transit Connect, Caddy", factor: 1.35 },
+  { key: "luton", label: "Large van / Luton", example: "Sprinter, Transit LWB", factor: 1.6 },
+];
+
+export type ConditionKey = "kept" | "average" | "neglected";
+
+export const conditions: {
+  key: ConditionKey;
+  label: string;
+  detail: string;
+  factor: number;
+}[] = [
+  { key: "kept", label: "Well kept", detail: "Cleaned regularly, light road film", factor: 1 },
+  { key: "average", label: "Lived in", detail: "Kids, dogs, a few months of neglect", factor: 1.15 },
+  {
+    key: "neglected",
+    label: "Second chance",
+    detail: "Ex-work, long neglected or ready for sale",
+    factor: 1.45,
+  },
+];
+
+// Typical hours on site for a standard family car, scaled by size/condition.
+export const baseDurations: Record<string, number> = {
+  "The Refresh": 1.5,
+  "The Signature": 3,
+  "Second Chance Restoration": 6,
+};
+
+export const estimatorBases: Record<string, number> = {
+  "The Refresh": 45,
+  "The Signature": 85,
+  "Second Chance Restoration": 160,
+};
+
+/* -------------------------------------------------------------------------
+ * COMMERCIAL / FLEET
+ * ---------------------------------------------------------------------- */
+
+export const fleetPoints = [
+  {
+    title: "On-site, out of hours",
+    body: "Early mornings, evenings and weekends so vehicles stay earning during the working day.",
+  },
+  {
+    title: "Priced per vehicle, per visit",
+    body: "A flat rate agreed up front for each vehicle class. One invoice, monthly, no admin.",
+  },
+  {
+    title: "Handover-ready finishes",
+    body: "Part-exchange and resale prep, including interior extraction and paint enhancement.",
+  },
+] as const;
+
+/* -------------------------------------------------------------------------
+ * COVERAGE MAP
+ * -------------------------------------------------------------------------
+ * Indicative positions on a stylised map — not a geographic projection.
+ * CONFIRM: which towns should appear as primary pins.
+ * ---------------------------------------------------------------------- */
+
+export const mapPins: { name: string; x: number; y: number; primary?: boolean }[] = [
+  { name: "Winchester", x: 52, y: 12 },
+  { name: "Romsey", x: 22, y: 30 },
+  { name: "Chandler's Ford", x: 43, y: 27 },
+  { name: "Eastleigh", x: 52, y: 34 },
+  { name: "Botley", x: 74, y: 33 },
+  { name: "Totton", x: 20, y: 52 },
+  { name: "Southampton", x: 42, y: 52, primary: true },
+  { name: "West End", x: 59, y: 44 },
+  { name: "Bitterne", x: 53, y: 58 },
+  { name: "Hedge End", x: 71, y: 52 },
+  { name: "Woolston", x: 47, y: 68 },
+  { name: "Fareham", x: 82, y: 62 },
+];

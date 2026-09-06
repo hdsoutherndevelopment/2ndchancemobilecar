@@ -8,6 +8,7 @@ type QuotePayload = {
   email?: string;
   postcode?: string;
   vehicle?: string;
+  condition?: string;
   service?: string;
   message?: string;
   company?: string; // honeypot
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
   const email = clean(payload.email, 160);
   const postcode = clean(payload.postcode, 20);
   const vehicle = clean(payload.vehicle, 80);
+  const condition = clean(payload.condition, 80);
   const service = clean(payload.service, 120);
   const message = clean(payload.message, 2000);
 
@@ -68,6 +70,7 @@ export async function POST(request: Request) {
     `Email: ${email || "—"}`,
     `Postcode: ${postcode}`,
     `Vehicle: ${vehicle || "—"}`,
+    `Condition: ${condition || "—"}`,
     `Interested in: ${service || "—"}`,
     "",
     message || "(no additional details)",

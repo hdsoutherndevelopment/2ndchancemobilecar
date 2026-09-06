@@ -1,14 +1,18 @@
 import Header from "@/components/Header";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 import TrustMarquee from "@/components/TrustMarquee";
 import Services from "@/components/Services";
+import Estimator from "@/components/Estimator";
 import Packages from "@/components/Packages";
-import Process from "@/components/Process";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import Restoration from "@/components/Restoration";
-import Coverage from "@/components/Coverage";
+import Fleet from "@/components/Fleet";
+import CoverageMap from "@/components/CoverageMap";
 import Faq from "@/components/Faq";
 import QuoteSection from "@/components/QuoteSection";
 import Footer from "@/components/Footer";
+import MobileBar from "@/components/MobileBar";
 import { faqs, services, site } from "@/lib/site";
 
 const jsonLd = {
@@ -54,19 +58,23 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ScrollProgress />
       <Header />
       <main>
         <Hero />
         <TrustMarquee />
         <Services />
+        <Estimator />
         <Packages />
-        <Process />
+        <ProcessTimeline />
         <Restoration />
-        <Coverage />
+        <Fleet />
+        <CoverageMap />
         <Faq />
         <QuoteSection />
       </main>
       <Footer />
+      <MobileBar />
     </>
   );
 }
